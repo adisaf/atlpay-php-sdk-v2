@@ -29,3 +29,18 @@ The bindings require the following extension in order to work properly:
 - [`ext_mbstring`](https://secure.php.net/manual/en/book.mbstring.php) (Multibyte String)
 
 If you use Composer, these dependencies should be handled automatically. If you install manually, you'll want to make sure that these extensions are available.
+
+## Getting Started
+Simple usage looks like:
+
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+```
+## SSL / TLS compatibility issues
+ATLPay's API now requires that all connections use TLS 1.2. Some systems (most notably some older CentOS and RHEL versions) are capable of using TLS 1.2 but will use TLS 1.0 or 1.1 by default. In this case, you'd get an BAD_REQUEST error with the following error message: "ATLPay no longer supports API requests made with TLS 1.0. Please initiate HTTPS connections with TLS 1.2 or later.
+
+The recommended course of action is to upgrade your cURL and OpenSSL packages so that TLS 1.2 is used by default, but if that is not possible, you might be able to solve the issue by setting the `CURLOPT_SSLVERSION` option to either `CURL_SSLVERSION_TLSv1` or `CURL_SSLVERSION_TLSv1_2`:
+
+```php
+\ATLPay\ATLPay::setSSLVersion(CURL_SSLVERSION_TLSv1_2);
+```

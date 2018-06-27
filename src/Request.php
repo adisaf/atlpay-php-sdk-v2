@@ -3,7 +3,6 @@ namespace ATLPay;
 use ATLPay\ATLPay;
 class Request{
 	
-	private $timeout			=	10;
 	public $httpStatus			=	NULL;
 	public $responseBody		=	NULL;
 	public $isCurlError			=	false;
@@ -19,7 +18,8 @@ class Request{
 		$curlHandle = curl_init(); 
 		curl_setopt($curlHandle, CURLOPT_URL, $endPoint); 
 		curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $headers); 
-		curl_setopt($curlHandle, CURLOPT_TIMEOUT, $this->timeout); 
+		curl_setopt($curlHandle, CURLOPT_TIMEOUT, ATLPay::getTimeout()); 
+		curl_setopt($curlHandle, CURLOPT_SSLVERSION , ATLPay::getSSLVersion()); 
 		curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true); 
 		if(ATLPay::getSSLVerifyStatus() === true){
 			curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
