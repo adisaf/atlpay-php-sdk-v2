@@ -59,7 +59,7 @@ if($token->isError()){
 	$cardLast4	=	$token->getLast4Digits();
 	$threeDRedirectStatus	=	$token->getRedirectStatus();
 	$transactionMode	=	$token->getMode();
-	// See Model/TokenModel for more Getter Methods
+	// See Model/TokenModel.php for more Getter Methods
 }
 ```
 
@@ -79,7 +79,7 @@ if($token->isError()){
 	$cardLast4	=	$token->getLast4Digits();
 	$threeDRedirectStatus	=	$token->getRedirectStatus();
 	$transactionMode	=	$token->getMode();
-	// See Model/TokenModel for more Getter Methods
+	// See Model/TokenModel.php for more Getter Methods
 }
 ```
 
@@ -100,10 +100,11 @@ if($charge->isError()){
 	$chargeAmount	=	$charge->getAmount();
 	$atlpayFees	=	$charge->getFees();	
 	$token	=	$charge->token();
+	// See Model/TokenModel.php for more Getter Methods
 	$threeDRedirectUrl	=	$charge->getRedirectUrl();
 	$threeDRedirectResult	=	$charge->get3DRedirectStatus();
 	$transactionMode	=	$charge->getMode();
-	// See Model/ChargeModel for more Getter Methods
+	// See Model/ChargeModel.php for more Getter Methods
 	if( $token->getRedirectStatus() == "REQUIRED" ){
 		header("Location:".$threeDRedirectUrl);
 		exit;
@@ -118,6 +119,26 @@ if($charge->isError()){
 ## Capturing a Charge
 
 ## Retrieving a Charge
+
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$charge	=	new \ATLPay\Charge();
+$charge->get($apChargeId);
+if($charge->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+ 	$chargeId	=	$charge->getId();
+	$chargeCurrency	=	$charge->getCurrency();
+	$chargeAmount	=	$charge->getAmount();
+	$atlpayFees	=	$charge->getFees();	
+	$token	=	$charge->token();
+	// See Model/TokenModel.php for more Getter Methods
+	$threeDRedirectUrl	=	$charge->getRedirectUrl();
+	$threeDRedirectResult	=	$charge->get3DRedirectStatus();
+	$transactionMode	=	$charge->getMode();
+	// See Model/ChargeModel.php for more Getter Methods	
+}
+```
 
 ## Creating a Refund
 
