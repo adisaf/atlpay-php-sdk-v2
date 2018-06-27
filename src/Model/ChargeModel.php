@@ -130,6 +130,11 @@ class ChargeModel extends ATLPayError{
 		return (isset($this->threedSecure->returnUrl) ? $this->threedSecure->returnUrl : NULL);
 	}
 	
+	//Checks whether charge was successful or not
+	public function isSuccess(){
+		return mb_strtoupper($this->status) == "CHARGE_SUCCESS";
+	}
+	
 }
 
 ?>

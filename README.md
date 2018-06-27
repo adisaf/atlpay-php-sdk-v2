@@ -114,10 +114,6 @@ if($charge->isError()){
 }
 ```
 
-## Cancelling an Authorized Charge
-
-## Capturing a Charge
-
 ## Retrieving a Charge
 
 ```php
@@ -130,7 +126,12 @@ if($charge->isError()){
  	$chargeId	=	$charge->getId();
 	$chargeCurrency	=	$charge->getCurrency();
 	$chargeAmount	=	$charge->getAmount();
-	$atlpayFees	=	$charge->getFees();	
+	$chargeStatus	=	$charge->getStatus();
+	if($charge->isSuccess()){
+		$atlpayFees	=	$charge->getFees();	
+	}else{
+		$failureReason	=	$charge->getReason();
+	}	
 	$token	=	$charge->token();
 	// See Model/TokenModel.php for more Getter Methods
 	$threeDRedirectUrl	=	$charge->getRedirectUrl();
@@ -139,6 +140,25 @@ if($charge->isError()){
 	// See Model/ChargeModel.php for more Getter Methods	
 }
 ```
+
+## Cancelling an Authorized Charge
+
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$charge	=	new \ATLPay\Charge();
+$charge->cancel($apChargeId);
+if($charge->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+	$chargeStatus	=	$charge->getStatus(); //CHARGE_FAILED
+	$failureReason	=	$charge->getReason(); //CANCEL_USING_API
+	$token	=	$charge->token();
+	// See Model/TokenModel.php for more Getter Methods
+	$threeDRedirectResult	=	$charge->get3DRedirectStatus();
+	$transactionMode	=	$charge->getMode();
+	// See Model/ChargeModel.php for more Getter Methods	
+}
+
+## Capturing a Charge
 
 ## Creating a Refund
 
