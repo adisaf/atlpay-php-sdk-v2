@@ -72,13 +72,13 @@ $token->getToken($tokenId);
 if($token->isError()){
  	// Error Happened, See error handling section for more details
 }else{
- 	$tokenId					=	$token->getId();
-	$cardBrand					=	$token->getCardBrand();
-	$cardIssuerCountry			=	$token->getCardCountry();
-	$cardFundingType			=	$token->getFundingType();
-	$cardLast4					=	$token->getLast4Digits();
-	$threeDRedirectStatus		=	$token->getRedirectStatus();
-	$transactionMode			=	$token->getMode();
+ 	$tokenId	=	$token->getId();
+	$cardBrand	=	$token->getCardBrand();
+	$cardIssuerCountry	=	$token->getCardCountry();
+	$cardFundingType	=	$token->getFundingType();
+	$cardLast4	=	$token->getLast4Digits();
+	$threeDRedirectStatus	=	$token->getRedirectStatus();
+	$transactionMode	=	$token->getMode();
 	// See Model/TokenModel for more Get Methods
 }
 ```
