@@ -33,6 +33,7 @@ If you use Composer, these dependencies should be handled automatically. If you 
 ATLPay APIv2 is synchronized API and provides instant confirmation thus it does not require notification url. Any status returned by API should be considered final. Simple usage looks like:
 
 ```php
+
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
 $token	=	new \ATLPay\Token();
 $token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
@@ -46,6 +47,7 @@ if($token->isError()){
 ## Creating a Token
 
 ```php
+
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
 $token	=	new \ATLPay\Token();
 $token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
@@ -86,6 +88,7 @@ if($token->isError()){
 ## Creating a Charge
 
 ```php
+
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
 $charge	=	new \ATLPay\Charge(ATLPAY_TOKEN_ID, 50.00, EUR, ORDER_NUMBER, ORDER_DESCRIPTION, 'https://www.your-return-url.com');
 //Here https://www.your-return-url.com is used as placeholder replace it with your url.
@@ -143,6 +146,7 @@ if($charge->isError()){
 
 ## Cancelling an Authorized Charge
 
+```php
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
 $charge	=	new \ATLPay\Charge();
 $charge->cancel($apChargeId);
@@ -151,14 +155,42 @@ if($charge->isError()){
 }else{
 	$chargeStatus	=	$charge->getStatus(); //CHARGE_FAILED
 	$failureReason	=	$charge->getReason(); //CANCEL_USING_API
-	$token	=	$charge->token();
-	// See Model/TokenModel.php for more Getter Methods
-	$threeDRedirectResult	=	$charge->get3DRedirectStatus();
 	$transactionMode	=	$charge->getMode();
 	// See Model/ChargeModel.php for more Getter Methods	
 }
+```
 
 ## Capturing a Charge
+
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$charge	=	new \ATLPay\Charge();
+$charge->get($apChargeId);
+if($charge->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+ 	$threeDRedirectUrl	=	$charge->getRedirectUrl();
+	$threeDRedirectResult	=	$charge->get3DRedirectStatus();
+	if($threeDRedirectResult == "CHARGEABLE"){
+		$charge->capture();
+		if($charge->isError()){
+			// Error Happened, See error handling section for more details
+		}else{
+			$chargeStatus	=	$charge->getStatus();
+			if($charge->isSuccess()){
+				$atlpayFees	=	$charge->getFees();	
+			}else{
+				$failureReason	=	$charge->getReason();
+			}	
+			$transactionMode	=	$charge->getMode();
+		}
+	}else{
+		header("Location:".$threeDRedirectUrl);
+		exit;
+	}	
+		
+}
+```
 
 ## Creating a Refund
 
