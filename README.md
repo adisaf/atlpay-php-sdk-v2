@@ -193,8 +193,39 @@ if($charge->isError()){
 ```
 
 ## Creating a Refund
+ATLPay lets you do partial and full refunds. It also allows you to process multiple partial refunds.
 
-## Retrieving a Refund
+A) Creating partial refund
+
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$refund	=	new \ATLPay\Charge();
+$refund->refund($apChargeId, $amountToRefund);
+if($refund->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+	$refundId		=	$refund->getId();
+	$refundAmount	=	$refund->getAmount();
+	$refundFees	=	$refund->getFees();
+	$transactionMode	=	$refund->getMode();
+}
+```
+
+B) Creating full refund
+
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$charge	=	new \ATLPay\Charge();
+$charge->refund($apChargeId);
+if($refund->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+	$refundId		=	$refund->getId();
+	$refundAmount	=	$refund->getAmount();
+	$refundFees	=	$refund->getFees();
+	$transactionMode	=	$refund->getMode();
+}
+```
 
 ## Custom Request Timeouts
 NOTE: We do not recommend decreasing the timeout for non-read-only calls (e.g. charge creation), since even if you locally timeout, the request on ATLPay's side can still complete.
