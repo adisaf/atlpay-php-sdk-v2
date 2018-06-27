@@ -37,18 +37,51 @@ ATLPay APIv2 is synchronized API and provides instant confirmation thus it does 
 $token	=	new \ATLPay\Token();
 $token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
 if($token->isError()){
- // Error Happened
+	//Error Happened, See error handling section for more details
 }else{
- // Everything went well
+	// Everything went well
 }
 ```
-## Tokens
 
 ## Creating a Token
 
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$token	=	new \ATLPay\Token();
+$token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
+if($token->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+ 	$tokenId					=	$token->getId();
+	$cardBrand					=	$token->getCardBrand();
+	$cardIssuerCountry			=	$token->getCardCountry();
+	$cardFundingType			=	$token->getFundingType();
+	$cardLast4					=	$token->getLast4Digits();
+	$threeDRedirectStatus		=	$token->getRedirectStatus();
+	$transactionMode			=	$token->getMode();
+	// See Model/TokenModel for more Get Methods
+}
+```
+
 ## Retrieving a Token
 
-## Charges
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$token	=	new \ATLPay\Token();
+$token->getToken($tokenId);
+if($token->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+ 	$tokenId					=	$token->getId();
+	$cardBrand					=	$token->getCardBrand();
+	$cardIssuerCountry			=	$token->getCardCountry();
+	$cardFundingType			=	$token->getFundingType();
+	$cardLast4					=	$token->getLast4Digits();
+	$threeDRedirectStatus		=	$token->getRedirectStatus();
+	$transactionMode			=	$token->getMode();
+	// See Model/TokenModel for more Get Methods
+}
+```
 
 ## Creating a Charge
 
