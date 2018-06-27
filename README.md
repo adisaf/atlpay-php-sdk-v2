@@ -38,9 +38,9 @@ ATLPay APIv2 is synchronized API and provides instant confirmation thus it does 
 $token	=	new \ATLPay\Token();
 $token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
 if($token->isError()){
-	
+	// Error handling
 }else{
-
+	// Ok Handling
 }
 ```
 
