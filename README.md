@@ -52,13 +52,13 @@ $token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER
 if($token->isError()){
  	// Error Happened, See error handling section for more details
 }else{
- 	$tokenId					=	$token->getId();
-	$cardBrand					=	$token->getCardBrand();
-	$cardIssuerCountry			=	$token->getCardCountry();
-	$cardFundingType			=	$token->getFundingType();
-	$cardLast4					=	$token->getLast4Digits();
-	$threeDRedirectStatus		=	$token->getRedirectStatus();
-	$transactionMode			=	$token->getMode();
+ 	$tokenId	=	$token->getId();
+	$cardBrand	=	$token->getCardBrand();
+	$cardIssuerCountry	=	$token->getCardCountry();
+	$cardFundingType	=	$token->getFundingType();
+	$cardLast4	=	$token->getLast4Digits();
+	$threeDRedirectStatus	=	$token->getRedirectStatus();
+	$transactionMode	=	$token->getMode();
 	// See Model/TokenModel for more Get Methods
 }
 ```
