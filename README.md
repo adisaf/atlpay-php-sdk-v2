@@ -19,7 +19,6 @@ require_once('vendor/autoload.php');
 ```
 
 
-
 ## Dependencies
 
 The bindings require the following extension in order to work properly:
@@ -38,11 +37,28 @@ ATLPay APIv2 is synchronized API and provides instant confirmation thus it does 
 $token	=	new \ATLPay\Token();
 $token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
 if($token->isError()){
-	// Error handling
+ // Error Happened
 }else{
-	// Ok Handling
+ // Everything went well
 }
 ```
+## Tokens
+
+## Creating a Token
+
+## Retrieving a Token
+
+## Charges
+
+## Creating a Charge
+
+## Cancelling an Authorized Charge
+
+## Retrieving a Charge
+
+## Creating a Refund
+
+## Retrieving a Refund
 
 ## Custom Request Timeouts
 NOTE: We do not recommend decreasing the timeout for non-read-only calls (e.g. charge creation), since even if you locally timeout, the request on ATLPay's side can still complete.
