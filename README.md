@@ -36,6 +36,13 @@ Simple usage looks like:
 ```php
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
 ```
+
+## Custom Request Timeouts
+NOTE: We do not recommend decreasing the timeout for non-read-only calls (e.g. charge creation), since even if you locally timeout, the request on ATLPay's side can still complete.
+```php
+\ATLPay\ATLPay::setTimeout(15);
+```
+
 ## SSL / TLS compatibility issues
 ATLPay's API now requires that all connections use TLS 1.2. Some systems (most notably some older CentOS and RHEL versions) are capable of using TLS 1.2 but will use TLS 1.0 or 1.1 by default. In this case, you'd get an BAD_REQUEST error with the following error message: "ATLPay no longer supports API requests made with TLS 1.0. Please initiate HTTPS connections with TLS 1.2 or later.
 
