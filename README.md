@@ -31,10 +31,17 @@ The bindings require the following extension in order to work properly:
 If you use Composer, these dependencies should be handled automatically. If you install manually, you'll want to make sure that these extensions are available.
 
 ## Getting Started
-Simple usage looks like:
+ATLPay APIv2 is synchronized API and provides instant confirmation thus it does not require notification url. Any status returned by API should be considered final. Simple usage looks like:
 
 ```php
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$token	=	new \ATLPay\Token();
+$token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
+if($token->isError()){
+	
+}else{
+
+}
 ```
 
 ## Custom Request Timeouts
