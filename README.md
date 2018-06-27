@@ -4,7 +4,15 @@ ATLPay Payment Gateway Integration PHP SDK using Version 2 API
 
 PHP 5.5.28 and later.
 
-## Composer
+Table of Contents
+=================
+
+  * [Installation and Usage](#installation-and-usage)
+  * [Dependencies](#dependencies)
+  * [Getting Started](#getting-started)
+  * [Creating a Token](#creating-a-token)
+
+## Installation and Usage
 
 You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
