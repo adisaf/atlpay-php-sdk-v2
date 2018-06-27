@@ -1,0 +1,17 @@
+{
+    "name": "atlpay/php-sdk-v2",
+    "description": "ATLPay APIv2 Integration PHP SDK",
+    "type": "library",
+    "require": {
+        "ext-curl": "^0.0.0",
+        "ext-json": "^1.2",
+        "ext-mbstring": "^0.0.0"
+    },
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Systems",
+            "email": "systems@atlpay.com"
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-# atlpay-php-sdk-v2
+# ATLPay PHP SDK for APIv2
 ATLPay Payment Gateway Integration PHP SDK using Version 2 API
 ## Requirements
 
