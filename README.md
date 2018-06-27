@@ -54,7 +54,7 @@ ATLPay APIv2 is synchronized API and provides instant confirmation thus it does 
 
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
 $token	=	new \ATLPay\Token();
-$token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
+$token->createToken('5555 5555 5555 4444', 12, 2020, '009', 'CARD_HOLDER_NAME' '192.168.1.1', 'USER SESSION ID', 'user@example.com');
 if($token->isError()){
 	//Error Happened, See error handling section for more details
 }else{
@@ -67,8 +67,8 @@ if($token->isError()){
 ```php
 
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
-$token	=	new \ATLPay\Token();
-$token->createToken('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
+$token	=	new \ATLPay\Token('5555 5555 5555 4444', 12, 2020, '009', '192.168.1.1', 'USER SESSION ID', 'user@example.com');
+$token->createToken();
 if($token->isError()){
  	// Error Happened, See error handling section for more details
 }else{

@@ -40,25 +40,25 @@ class ATLPay {
 	//Setter Function for cURL request timeout
 	public static function setTimeout($timeout){
 		if( is_numeric($timeout) ){
-			$this->timeout	=	$timeout;
+			self::$timeout	=	$timeout;
 		}
 	}
 	
 	//Getter Function for cURL request timeout
 	public static function getTimeout(){
-		return $this->timeout;
+		return self::$timeout;
 	}
 	
 	//Setter Function for SSL Version to use for cURL Request
 	public static function setSSLVersion($sslVersion){
 		if( is_numeric($timeout) ){
-			$this->sslVersion	=	$sslVersion;
+			self::$sslVersion	=	$sslVersion;
 		}
 	}
 	
 	//Getter Function for getting SSL Version being Used for cURL Requests, returns INT
 	public static function getSSLVersion(){
-		return $this->sslVersion;
+		return self::$sslVersion;
 	}
 	
 }
