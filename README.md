@@ -1,4 +1,4 @@
-# php-sdk
+# atlpay-php-sdk-v2
 ATLPay Payment Gateway Integration PHP SDK using Version 2 API
 ## Requirements
 
@@ -24,8 +24,8 @@ require_once('vendor/autoload.php');
 
 The bindings require the following extension in order to work properly:
 
-- [`curl`](https://secure.php.net/manual/en/book.curl.php), although you can use your own non-cURL client if you prefer
-- [`json`](https://secure.php.net/manual/en/book.json.php)
-- [`mbstring`](https://secure.php.net/manual/en/book.mbstring.php) (Multibyte String)
+- [`ext_curl`](https://secure.php.net/manual/en/book.curl.php), although you can use your own non-cURL client if you prefer
+- [`ext_json`](https://secure.php.net/manual/en/book.json.php)
+- [`ext_mbstring`](https://secure.php.net/manual/en/book.mbstring.php) (Multibyte String)
 
 If you use Composer, these dependencies should be handled automatically. If you install manually, you'll want to make sure that these extensions are available.
