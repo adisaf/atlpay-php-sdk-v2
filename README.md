@@ -1,16 +1,26 @@
 # ATLPay PHP SDK for APIv2
 ATLPay Payment Gateway Integration PHP SDK using Version 2 API
-## Requirements
-
-PHP 5.5.28 and later.
 
 Table of Contents
 =================
-
+  * [Requirements](#requirements)
   * [Installation and Usage](#installation-and-usage)
   * [Dependencies](#dependencies)
   * [Getting Started](#getting-started)
   * [Creating a Token](#creating-a-token)
+  * [Retrieving a Token](#retrieving-a-token)
+  * [Creating a Charge](#creating-a-charge)
+  * [Retrieving a Charge](#retrieving-a-charge)
+  * [Cancelling a Charge](#cancelling-an-authorized-charge)
+  * [Capturing a Charge](#capturing-a-charge)
+  * [Creating a Refund](#creating-a-refund)
+  * [Custom Request Timeouts](#custom-request-timeouts)
+  * [SSL / TLS compatibility issues](#ssl--tls-compatibility-issues)
+
+## Requirements
+
+PHP 5.5.28 and later.
+
 
 ## Installation and Usage
 
