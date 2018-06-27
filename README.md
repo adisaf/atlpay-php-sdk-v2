@@ -59,7 +59,7 @@ if($token->isError()){
 	$cardLast4	=	$token->getLast4Digits();
 	$threeDRedirectStatus	=	$token->getRedirectStatus();
 	$transactionMode	=	$token->getMode();
-	// See Model/TokenModel for more Get Methods
+	// See Model/TokenModel for more Getter Methods
 }
 ```
 
@@ -79,13 +79,43 @@ if($token->isError()){
 	$cardLast4	=	$token->getLast4Digits();
 	$threeDRedirectStatus	=	$token->getRedirectStatus();
 	$transactionMode	=	$token->getMode();
-	// See Model/TokenModel for more Get Methods
+	// See Model/TokenModel for more Getter Methods
 }
 ```
 
 ## Creating a Charge
 
+```php
+\ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
+$charge	=	new \ATLPay\Charge(ATLPAY_TOKEN_ID, 50.00, EUR, ORDER_NUMBER, ORDER_DESCRIPTION, 'https://www.your-return-url.com');
+//Here https://www.your-return-url.com is used as placeholder replace it with your url.
+//After 3D Authorization is completed User will be redirected back this url and you can proceed with
+//capturing or cancelling the charge. Refer to Handling 3DS or 3-D Security for more details 
+$charge->initialize();
+if($charge->isError()){
+ 	// Error Happened, See error handling section for more details
+}else{
+ 	$chargeId	=	$charge->getId();
+	$chargeCurrency	=	$charge->getCurrency();
+	$chargeAmount	=	$charge->getAmount();
+	$atlpayFees	=	$charge->getFees();	
+	$token	=	$charge->token();
+	$threeDRedirectUrl	=	$charge->getRedirectUrl();
+	$threeDRedirectResult	=	$charge->get3DRedirectStatus();
+	$transactionMode	=	$charge->getMode();
+	// See Model/ChargeModel for more Getter Methods
+	if( $token->getRedirectStatus() == "REQUIRED" ){
+		header("Location:".$threeDRedirectUrl);
+		exit;
+	}else{
+		//Capture the charge directly, See Capturing a Charge
+	}	
+}
+```
+
 ## Cancelling an Authorized Charge
+
+## Capturing a Charge
 
 ## Retrieving a Charge
 

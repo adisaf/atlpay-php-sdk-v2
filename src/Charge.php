@@ -12,6 +12,22 @@ class Charge extends ChargeModel{
 	private $description			=	NULL;
 	private $returnUrl				=	NULL;
 	
+	public function __construct(
+		$token = NULL, 
+		$amount = NULL, 
+		$currency = NULL, 
+		$orderNumber = NULL, 
+		$description = NULL, 
+		$returnUrl = NULL
+	){
+		$this->token		=	$token;
+		$this->amount		=	$amount;
+		$this->currency		=	$currency;
+		$this->orderNumber	=	$orderNumber;
+		$this->description	=	$description;
+		$this->returnUrl	=	$returnUrl;
+	}
+	
 	//Setter Function for Order Total Amount
 	public function setAmount($amount){
 		$this->amount	=	(float)$amount * 100;
