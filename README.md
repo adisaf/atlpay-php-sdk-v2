@@ -1,7 +1,7 @@
 # ATLPay PHP SDK for APIv2
 PHP Wrapper for ATLPay API Version 2
 
-[ATLPay APIv2 Documentation](http://atlpay-php-sdk-v2.readthedocs.io)
+[ATLPay APIv2 Documentation](http://atlpay.readthedocs.io)
 
 Table of Contents
 =================
@@ -98,7 +98,7 @@ Tokens cannot be stored or used more than once.
 
 ### Client Side
 
-Creating token using ATLPay.js is described [here](http://atlpay-php-sdk-v2.readthedocs.io).
+Creating token using ATLPay.js is described [here](http://atlpay.readthedocs.io).
 
 ### Server side
 
