@@ -70,6 +70,20 @@ if($token->isError()){
 
 ## Error Handling
 
+ATLPay uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the `2xx` range indicate success. Codes in the `4xx` range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.). Codes in the `5xx` range indicate an error with ATLPay's servers (these are rare).
+
+Some `4xx` errors that could be handled programmatically (e.g., a card is declined) include an error code that briefly explains the error reported.
+
+#### HTTP status code summary
+HTTP Status Code | Description
+--- | ---
+200 | Everything worked as expected.
+400 | The request was unacceptable, often due to missing a required parameter.
+401 | No valid API key provided.
+402 | The parameters were valid but the request failed.
+404 | The requested resource doesn't exist.
+500, 502, 503, 504 | Something went wrong on ATLPay's end. (These are rare.)
+
 ## Creating a Token
 
 ```php
