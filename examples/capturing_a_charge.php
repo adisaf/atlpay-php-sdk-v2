@@ -9,6 +9,8 @@ $charge->get("I2018062895690");
 if($charge->isError()){
 	if(in_array($charge->httpCode, [500, 502, 503, 504])){
 		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 400){
+		die($charge->message);
 	}else if($charge->httpCode == 401){
 		die("Check your API Key");
 	}else if($charge->httpCode == 402){
@@ -51,7 +53,19 @@ if($charge->isError()){
 		echo "------------------------------------------------------------<br />";
 		$charge->capture();
 		if($charge->isError()){
-			debug($charge);
+			if(in_array($charge->httpCode, [500, 502, 503, 504])){
+				die("Something went wrong on ATLPay's end. (These are rare.)");
+			}else if($charge->httpCode == 400){
+				die($charge->message);
+			}else if($charge->httpCode == 401){
+				die("Check your API Key");
+			}else if($charge->httpCode == 402){
+				die("You may encounter this error if you're not using TLS_1_2");
+			}else if($charge->httpCode == 403){
+				die("Check your API Key");
+			}else if($charge->httpCode == 404){
+				die("Charge Not Found.");
+			}
 		}else{
 			$chargeStatus	=	$charge->getStatus();
 			if($charge->isSuccess()){

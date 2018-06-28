@@ -8,6 +8,8 @@ $charge->get("J2018062881756");
 if($charge->isError()){
 	if(in_array($charge->httpCode, [500, 502, 503, 504])){
 		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 400){
+		die($charge->message);
 	}else if($charge->httpCode == 401){
 		die("Check your API Key");
 	}else if($charge->httpCode == 402){
