@@ -11,7 +11,7 @@ class ATLPayError{
 	
 	//Function to unfold ATLPay Error Response	
 	public function unfold($errorResponse, $httpCode = 500){
-		$this->httpCode	=	$httpCode;
+		$this->httpCode	=	(int)$httpCode;
 		$error	=	json_decode($errorResponse);
 		if(NULL !== $error){
 			$this->message	=	@$error->message;
@@ -31,8 +31,6 @@ class ATLPayError{
 					}
 				}
 			}
-		}else{
-			//debug("Something Went Wrong Outside of ATLPay : ".$errorResponse);
 		}
 		$this->isError	=	true;
 		return $this;
