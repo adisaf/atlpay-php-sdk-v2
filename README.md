@@ -268,21 +268,12 @@ The recommended course of action is to upgrade your cURL and OpenSSL packages so
 Following test cards can be used for testing ATLPay API
 
 Card Number | Brand | Funding Type | Issuer Country
---- | --- | --- | ---
 5555 5555 5555 4444 | MasterCard | Credit | GB
---- | --- | --- | ---
 5454 5454 5454 5454 | MasterCard | Debit | FR
---- | --- | --- | ---
 5555 5555 5555 4443 | MasterCard | Credit | GB
---- | --- | --- | ---
 5454 5454 5454 5453 | MasterCard | Debit | GB
---- | --- | --- | ---
 6759 6498 2643 8450 | Maestro | Debit | GB
---- | --- | --- | ---
 4444 3333 2222 1111 | Visa | Credit | FR
---- | --- | --- | ---
 4462 0300 0000 0000 | Visa | Debit | IN
---- | --- | --- | ---
 4444 3333 2222 1112 | Visa | Credit | FR
---- | --- | --- | ---
 4462 0300 0000 0001 | Visa | Debit | FR
