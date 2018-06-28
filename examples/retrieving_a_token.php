@@ -8,6 +8,8 @@ $token->getToken("1397560a-fc96-4a75-8635-f6c88f3f99ca");
 if($token->isError()){
 	if(in_array($token->httpCode, [500, 502, 503, 504])){
 		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($token->httpCode == 400){
+		die($token->message);
 	}else if($token->httpCode == 401){
 		die("Check your API Key");
 	}else if($token->httpCode == 402){
