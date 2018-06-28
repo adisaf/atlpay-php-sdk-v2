@@ -98,7 +98,7 @@ Tokens cannot be stored or used more than once.
 
 ### Client Side
 
-Creating token using ATLPay.js in described [here](http://atlpay-php-sdk-v2.readthedocs.io).
+Creating token using ATLPay.js is described [here](http://atlpay-php-sdk-v2.readthedocs.io).
 
 ### Server side
 
