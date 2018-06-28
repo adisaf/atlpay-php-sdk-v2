@@ -26,7 +26,7 @@ if($token->isError()){
 		}else if(isset($token->param) && $token->param == "shopper.email"){
 			die("Problem with Shopper E-Mail : (".$token->code.") ".$token->message);
 		}else{
-			die("Problem with ".$token->param." : (".$token->code.") ".$token->message);
+			die("Problem : ".$token->message);
 		}
 	}else if($token->httpCode == 401){
 		die("Check your API Key");

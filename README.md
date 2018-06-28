@@ -177,7 +177,28 @@ $charge	=	new \ATLPay\Charge(ATLPAY_TOKEN_ID, 50.00, EUR, ORDER_NUMBER, ORDER_DE
 //capturing or cancelling the charge. Refer to Handling 3DS or 3-D Security for more details 
 $charge->initialize();
 if($charge->isError()){
- 	// Error Happened, See error handling section for more details
+ 	if(in_array($charge->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 400){
+		if(isset($charge->param) && $charge->param == "amount"){
+			die("Problem with Charge Amount : (".$charge->code.") ".$charge->message);
+		}else if(isset($charge->param) && $charge->param == "currency"){
+			die("Problem with Charge Currency : (".$charge->code.") ".$charge->message);
+		}else if(isset($charge->param) && $charge->param == "description"){
+			die("Problem with Charge Description : (".$charge->code.") ".$charge->message);
+		}else if(isset($charge->param) && $charge->param == "return_url"){
+			die("Problem with Return URL : (".$charge->code.") ".$charge->message);
+		}else{
+			die("Problem with ".$charge->param." : (".$charge->code.") ".$charge->message);
+		}
+	}else if($charge->httpCode == 401){
+		die("Check your API Key");
+	}else if($charge->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($charge->httpCode == 403){
+		die("Check your API Key");
+	}
+	//Since we are creating charge, this request shall not be ended httpCode 404 i.e. Not Found
 }else{
  	$chargeId	=	$charge->getId();
 	$chargeCurrency	=	$charge->getCurrency();
@@ -205,7 +226,17 @@ if($charge->isError()){
 $charge	=	new \ATLPay\Charge();
 $charge->get($apChargeId);
 if($charge->isError()){
- 	// Error Happened, See error handling section for more details
+ 	if(in_array($charge->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 401){
+		die("Check your API Key");
+	}else if($charge->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($charge->httpCode == 403){
+		die("Check your API Key");
+	}else if($charge->httpCode == 404){
+		die("Charge Not Found.");
+	}
 }else{
  	$chargeId	=	$charge->getId();
 	$chargeCurrency	=	$charge->getCurrency();
@@ -232,7 +263,19 @@ if($charge->isError()){
 $charge	=	new \ATLPay\Charge();
 $charge->cancel($apChargeId);
 if($charge->isError()){
- 	// Error Happened, See error handling section for more details
+ 	if(in_array($charge->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 400){
+		die($charge->message);
+	}else if($charge->httpCode == 401){
+		die("Check your API Key");
+	}else if($charge->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($charge->httpCode == 403){
+		die("Check your API Key");
+	}else if($charge->httpCode == 404){
+		die("Charge Not Found.");
+	}
 }else{
 	$chargeStatus	=	$charge->getStatus(); //CHARGE_FAILED
 	$failureReason	=	$charge->getReason(); //CANCEL_USING_API
@@ -248,7 +291,17 @@ if($charge->isError()){
 $charge	=	new \ATLPay\Charge();
 $charge->get($apChargeId);
 if($charge->isError()){
- 	// Error Happened, See error handling section for more details
+ 	if(in_array($charge->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 401){
+		die("Check your API Key");
+	}else if($charge->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($charge->httpCode == 403){
+		die("Check your API Key");
+	}else if($charge->httpCode == 404){
+		die("Charge Not Found.");
+	}
 }else{
  	$threeDRedirectUrl	=	$charge->getRedirectUrl();
 	$threeDRedirectResult	=	$charge->get3DRedirectStatus();
@@ -265,10 +318,12 @@ if($charge->isError()){
 			}	
 			$transactionMode	=	$charge->getMode();
 		}
-	}else{
+	}else if($threeDRedirectResult == "PENDING"){
 		header("Location:".$threeDRedirectUrl);
 		exit;
-	}	
+	}else{
+		die("Charge Status : <strong>".$chargeStatus."</strong> is not capturable.");
+	}
 		
 }
 ```
@@ -283,7 +338,19 @@ A) Creating partial refund
 $refund	=	new \ATLPay\Charge();
 $refund->refund($apChargeId, $amountToRefund);
 if($refund->isError()){
- 	// Error Happened, See error handling section for more details
+ 	if(in_array($refund->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($refund->httpCode == 400){
+		die($refund->message);
+	}else if($refund->httpCode == 401){
+		die("Check your API Key");
+	}else if($refund->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($refund->httpCode == 403){
+		die("Check your API Key");
+	}else if($refund->httpCode == 404){
+		die("Charge Not Found.");
+	}
 }else{
 	$refundId		=	$refund->getId();
 	$refundAmount	=	$refund->getAmount();
@@ -296,10 +363,22 @@ B) Creating full refund
 
 ```php
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
-$charge	=	new \ATLPay\Charge();
-$charge->refund($apChargeId);
+$refund	=	new \ATLPay\Charge();
+$refund->refund($apChargeId);
 if($refund->isError()){
- 	// Error Happened, See error handling section for more details
+ 	if(in_array($refund->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($refund->httpCode == 400){
+		die($refund->message);
+	}else if($refund->httpCode == 401){
+		die("Check your API Key");
+	}else if($refund->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($refund->httpCode == 403){
+		die("Check your API Key");
+	}else if($refund->httpCode == 404){
+		die("Charge Not Found.");
+	}
 }else{
 	$refundId		=	$refund->getId();
 	$refundAmount	=	$refund->getAmount();

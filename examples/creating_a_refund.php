@@ -7,7 +7,19 @@ $refund	=	new \ATLPay\Charge();
 $refund->refund("J2018062881756"); // FUll Refund
 //$refund->refund("J2018062881756", 10); // Partial Refund
 if($refund->isError()){
-	debug($refund);
+	if(in_array($refund->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($refund->httpCode == 400){
+		die($refund->message);
+	}else if($refund->httpCode == 401){
+		die("Check your API Key");
+	}else if($refund->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($refund->httpCode == 403){
+		die("Check your API Key");
+	}else if($refund->httpCode == 404){
+		die("Charge Not Found.");
+	}
 }else{
  	$refundId		=	$refund->getId();
 	$refundAmount	=	$refund->getAmount();

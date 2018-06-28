@@ -5,9 +5,19 @@ require_once("functions.php");
 \ATLPay\ATLPay::setSecretKey('29341b455857e4081dded5a14ec598d54676aa75');
 \ATLPay\ATLPay::setSecretKey('29341b455857e4081dded5a14ec598d54676aa75');
 $charge	=	new \ATLPay\Charge();
-$charge->get("J2018062881756");
+$charge->get("I2018062895690");
 if($charge->isError()){
-	debug($charge);
+	if(in_array($charge->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 401){
+		die("Check your API Key");
+	}else if($charge->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($charge->httpCode == 403){
+		die("Check your API Key");
+	}else if($charge->httpCode == 404){
+		die("Charge Not Found.");
+	}
 }else{
  	$chargeId	=	$charge->getId();
 	$chargeCurrency	=	$charge->getCurrency();
@@ -58,8 +68,10 @@ if($charge->isError()){
 			echo "Failure Reason : <strong>".(@$failureReason ?: "Unknown")."</strong><br />";
 		}
 		echo "Mode : <strong>".$transactionMode."</strong><br />";
-	}else{
+	}else if($threeDRedirectResult == "PENDING"){
 		header("Location:".$threeDRedirectUrl);
 		exit;
-	}	
+	}else{
+		echo "Charge Status : <strong>".$chargeStatus."</strong> is not capturable.<br />";
+	}
 }

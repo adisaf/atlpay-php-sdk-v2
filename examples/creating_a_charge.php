@@ -3,10 +3,31 @@ session_start();
 require_once("../vendor/autoload.php");
 require_once("functions.php");
 \ATLPay\ATLPay::setSecretKey('29341b455857e4081dded5a14ec598d54676aa75');
-$charge	=	new \ATLPay\Charge("9e6c91cd-bd80-4313-88a8-cad81e642feb", 50.00, "GBP", "SDKT-0001", "Test Payment", 'http://127.0.0.1/atlpay-sdk-v2/examples/three_d_return.php');
+$charge	=	new \ATLPay\Charge("98add6bb-4a8a-493a-8654-87431745d52d", 50.00, "GBP", "SDKT-0002", "Test Payment", 'http://127.0.0.1/atlpay-sdk-v2/examples/three_d_return.php');
 $charge->initialize();
 if($charge->isError()){
-	debug($charge);
+	if(in_array($charge->httpCode, [500, 502, 503, 504])){
+		die("Something went wrong on ATLPay's end. (These are rare.)");
+	}else if($charge->httpCode == 400){
+		if(isset($charge->param) && $charge->param == "amount"){
+			die("Problem with Charge Amount : (".$charge->code.") ".$charge->message);
+		}else if(isset($charge->param) && $charge->param == "currency"){
+			die("Problem with Charge Currency : (".$charge->code.") ".$charge->message);
+		}else if(isset($charge->param) && $charge->param == "description"){
+			die("Problem with Charge Description : (".$charge->code.") ".$charge->message);
+		}else if(isset($charge->param) && $charge->param == "return_url"){
+			die("Problem with Return URL : (".$charge->code.") ".$charge->message);
+		}else{
+			die("Problem : ".$charge->message);
+		}
+	}else if($charge->httpCode == 401){
+		die("Check your API Key");
+	}else if($charge->httpCode == 402){
+		die("You may encounter this error if you're not using TLS_1_2");
+	}else if($charge->httpCode == 403){
+		die("Check your API Key");
+	}
+	//Since we are creating charge, this request shall not be ended httpCode 404 i.e. Not Found
 }else{
  	$chargeId	=	$charge->getId();
 	$chargeCurrency	=	$charge->getCurrency();
