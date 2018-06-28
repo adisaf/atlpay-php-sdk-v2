@@ -10,6 +10,7 @@ Table of Contents
   * [Dependencies](#dependencies)
   * [Getting Started](#getting-started)
   * [Error Handling](#error-handling)
+  * [Tokens](#tokens)
   * [Creating a Token](#creating-a-token)
   * [Retrieving a Token](#retrieving-a-token)
   * [Creating a Charge](#creating-a-charge)
@@ -84,6 +85,14 @@ HTTP Status Code | Description
 403 | You are not authorized to perform this transaction.
 404 | The requested resource doesn't exist.
 500, 502, 503, 504 | Something went wrong on ATLPay's end. (These are rare.)
+
+## Tokens
+
+Tokenization is the process ATLPay uses to collect sensitive card or personally identifiable information (PII), directly from your customers in a secure manner. A token representing this information is returned to your server to use. You should use [ATLPay.js](https://www.atlpay.com/js/ATLPay.js) or our mobile libraries to perform this process, client-side. This ensures that no sensitive card data touches your server, and allows your integration to operate in a PCI-compliant way.
+
+If you cannot use client-side tokenization, you can also create tokens using the API with secret API key. Keep in mind that if your integration uses this method, you are responsible for any PCI compliance that may be required, and you must keep your secret API key safe. Unlike with client-side tokenization, your customer's information is not sent directly to ATLPay, so we cannot determine how it is handled or stored.
+
+Tokens cannot be stored or used more than once.
 
 ## Creating a Token
 
