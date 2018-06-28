@@ -96,6 +96,12 @@ Tokens cannot be stored or used more than once.
 
 ## Creating a Token
 
+### Client Side
+
+
+
+### Server side
+
 ```php
 
 \ATLPay\ATLPay::setSecretKey('PLACE_YOUR_SECRET_KEY_HERE');
