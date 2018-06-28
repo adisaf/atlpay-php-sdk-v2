@@ -98,7 +98,9 @@ Tokens cannot be stored or used more than once.
 
 ### Client Side
 
+Include ATLPay.js in `<head>` section of your html.
 
+`<script src="https://www.atlpay.com/js/ATLPay.js"></script>`
 
 ### Server side
 
