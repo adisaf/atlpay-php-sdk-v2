@@ -9,6 +9,7 @@ Table of Contents
   * [Installation and Usage](#installation-and-usage)
   * [Dependencies](#dependencies)
   * [Getting Started](#getting-started)
+  * [Error Handling](#error-handling)
   * [Creating a Token](#creating-a-token)
   * [Retrieving a Token](#retrieving-a-token)
   * [Creating a Charge](#creating-a-charge)
@@ -66,6 +67,8 @@ if($token->isError()){
 	// Everything went well
 }
 ```
+
+## Error Handling
 
 ## Creating a Token
 
