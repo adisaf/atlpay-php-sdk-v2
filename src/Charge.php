@@ -21,11 +21,12 @@ class Charge extends ChargeModel{
 		$returnUrl = NULL
 	){
 		$this->token		=	$token;
-		$this->amount		=	$amount;
+		$this->amount		=	(float)$amount * 100;
 		$this->currency		=	$currency;
 		$this->orderNumber	=	$orderNumber;
 		$this->description	=	$description;
 		$this->returnUrl	=	$returnUrl;
+		parent::__construct();
 	}
 	
 	//Setter Function for Order Total Amount
@@ -89,7 +90,7 @@ class Charge extends ChargeModel{
 		$endPoint							=	ATLPay::$endPoint.'/charges/refund/'.($id ?: $this->getId());
 		$payload							=	[];		
 		if($amount){
-			$payload["amount"]				=	$amount;		
+			$payload["amount"]				=	(int)$amount*100;		
 		}else if($this->amount){
 			$payload["amount"]				=	$this->amount;		
 		}		
