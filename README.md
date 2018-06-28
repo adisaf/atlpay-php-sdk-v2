@@ -261,3 +261,11 @@ The recommended course of action is to upgrade your cURL and OpenSSL packages so
 ```php
 \ATLPay\ATLPay::setSSLVersion(CURL_SSLVERSION_TLSv1_2);
 ```
+
+## Test Cards
+
+Following test cards can be used for testing ATLPay API
+
+Card Number | #Brand | #Funding Type | #Issuer Country
+--- | --- | --- | ---
+Seconds | 5555 5555 5555 4444 | MasterCard | Credit | GB
