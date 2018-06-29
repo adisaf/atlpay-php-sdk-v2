@@ -2,7 +2,7 @@
 session_start();
 require_once("../vendor/autoload.php");
 require_once("functions.php");
-\ATLPay\ATLPay::setSecretKey('29341b455857e4081dded5a14ec598d54676aa75');
+\ATLPay\ATLPay::setSecretKey('YOUR_SECRET_KEY');
 $token	=	new \ATLPay\Token('5555 5555 5555 4444', 12, 2020, '123', "DEMO USER", '203.163.244.165', session_id(), 'user@example.com');
 $token->createToken();
 if($token->isError()){

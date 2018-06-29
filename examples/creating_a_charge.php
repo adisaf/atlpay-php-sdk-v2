@@ -2,7 +2,7 @@
 session_start();
 require_once("../vendor/autoload.php");
 require_once("functions.php");
-\ATLPay\ATLPay::setSecretKey('29341b455857e4081dded5a14ec598d54676aa75');
+\ATLPay\ATLPay::setSecretKey('YOUR_SECRET_KEY');
 $charge	=	new \ATLPay\Charge("98add6bb-4a8a-493a-8654-87431745d52d", 50.00, "GBP", "SDKT-0002", "Test Payment", 'http://127.0.0.1/atlpay-sdk-v2/examples/capturing_a_charge.php');
 $charge->initialize();
 if($charge->isError()){

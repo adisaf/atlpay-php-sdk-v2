@@ -2,7 +2,7 @@
 session_start();
 require_once("../vendor/autoload.php");
 require_once("functions.php");
-\ATLPay\ATLPay::setSecretKey('29341b455857e4081dded5a14ec598d54676aa75');
+\ATLPay\ATLPay::setSecretKey('YOUR_SECRET_KEY');
 $charge	=	new \ATLPay\Charge();
 $charge->cancel("I2018062895690");
 if($charge->isError()){
