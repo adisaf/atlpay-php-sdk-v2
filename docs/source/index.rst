@@ -6,6 +6,7 @@
    authentication
    errors
    tokens
+   charges
    
 Introduction
 ============

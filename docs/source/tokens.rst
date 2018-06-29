@@ -16,7 +16,7 @@ The token object
    :widths: 20, 80
 
    "type", "type of the object, in this case it will return ``token``"
-   "id", "Token ID, you will need it for creating a charge."
+   "id", "Unique identifier for the object."
    "card.fundingType", "Funding type of card ``CREDIT`` or ``DEBIT``"
    "card.country", "ISO 2 country code of the card eg. GB, FR etc."
    "card.last4Digits", "Last 4 digits of the card"
