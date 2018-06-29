@@ -7,8 +7,10 @@ To use your API key, you need only call ``\ATLPay\ATLPay::setSecretKey()`` with 
 
 cURL Example
 
->>> curl -X POST \
->>>  https://api.atlpay.com/v2/tokens \
->>>  -H 'X-Api-Key: YOUR_API_KEY_HERE'
+.. code-block:: bash
+
+    curl -X POST \
+    	https://api.atlpay.com/v2/tokens \
+    	-H 'X-Api-Key: YOUR_API_KEY_HERE'
 
 All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
