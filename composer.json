@@ -10,7 +10,7 @@
 	"autoload": {
         "psr-4": { "ATLPay\\": "src/" }
     },
-    "license": "GPL",
+    "license": "MIT",
     "authors": [
         {
             "name": "Systems",
