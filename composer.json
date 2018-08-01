@@ -3,9 +3,9 @@
     "description": "ATLPay APIv2 Integration PHP SDK",
     "type": "library",
     "require": {
-        "ext-curl": "^0.0.0",
-        "ext-json": "^1.2",
-        "ext-mbstring": "^0.0.0"
+        "ext-curl": ">=0.0.0",
+        "ext-json": ">=1.2",
+        "ext-mbstring": ">=0.0.0"
     },
 	"autoload": {
         "psr-4": { "ATLPay\\": "src/" }
